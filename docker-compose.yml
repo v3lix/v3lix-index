@@ -1,0 +1,18 @@
+version: '3.5'
+
+services:
+  v3lix-dv1:
+    build: "/opt/v3lix-index/"
+    container_name: "v3lix-dv1"
+    networks:
+      - "traefik"
+    labels:
+      traefik.enable: true
+      traefik.http.routers.v3lix-name.rule: "Host(`v3lix.com`)"
+      traefik.http.routers.v3lix-name.tls: true
+      traefik.http.services.v3lix-dv1.loadbalancer.server.port: 8080
+
+networks:
+  traefik:
+    name: "traefik_default"
+    external: true
